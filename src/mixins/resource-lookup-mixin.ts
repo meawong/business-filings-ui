@@ -15,7 +15,9 @@ export default class ResourceLookupMixin extends Vue {
 
     /**
      * Returns certify message using the configuration lookup object.
-     * @param entity the entity type of the component
+     * All corporations use a standard message at the root level; flow-specific overrides
+     * are used only when needed (e.g., COOP has different act sections per filing type).
+     * @param feeCode the filing fee code
      * @returns the appropriate message for the certify component for the current filing flow
      */
     certifyText (feeCode: string): string {
@@ -23,7 +25,8 @@ export default class ResourceLookupMixin extends Vue {
       if (flow?.certifyText) {
         return flow.certifyText
       }
-      return ''
+      // Fall back to the root-level certify message if the flow doesn't define one.
+      return this.configObject?.certifyText || ''
     }
 
     /**

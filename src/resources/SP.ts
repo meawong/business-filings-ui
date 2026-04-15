@@ -8,18 +8,15 @@ export const BusinessConfigSp = {
   flows: [
     {
       feeCode: null,
-      displayName: 'Change Of Address',
-      certifyText: ''
+      displayName: 'Change Of Address'
     },
     {
       feeCode: null,
-      displayName: 'Annual Report',
-      certifyText: ''
+      displayName: 'Annual Report'
     },
     {
       feeCode: null,
-      displayName: 'Change Of Directors',
-      certifyText: ''
+      displayName: 'Change Of Directors'
     }
   ],
   obligations: {

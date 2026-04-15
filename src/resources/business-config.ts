@@ -15,12 +15,13 @@ import { BusinessConfigUlc } from './ULC'
 export class Flow {
   feeCode: FilingCodes
   displayName: string
-  certifyText: string
+  certifyText?: string
 }
 
 export class Business {
   entityType: CorpTypeCd
   displayName: string
+  certifyText?: string
   flows: Array<Flow>
 }
 

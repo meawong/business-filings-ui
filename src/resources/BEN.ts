@@ -6,29 +6,23 @@ import { GetCorpFullDescription } from '@bcrs-shared-components/corp-type-module
 export const BusinessConfigBen = {
   entityType: CorpTypeCd.BENEFIT_COMPANY,
   displayName: GetCorpFullDescription(CorpTypeCd.BENEFIT_COMPANY),
+  certifyText: 'It is an offence to make a false or misleading statement in ' +
+               'respect of a material fact in a record submitted to the Corporate Registry for filing. ' +
+               'See section 427 of the <em>Business Corporations Act</em>.',
   flows: [
     {
       feeCode: FilingCodes.ADDRESS_CHANGE_BC,
       displayName: 'Change Of Address',
-      certifyText: 'It is an offence to make a false or misleading statement in ' +
-          'respect of a material fact in a record submitted to the Corporate Registry for filing. ' +
-          'See Sections 35 and 36 of the Business Corporations Act.',
       confirmationType: 'CONFIRM'
     },
     {
       feeCode: FilingCodes.ANNUAL_REPORT_BC,
       displayName: 'Annual Report',
-      certifyText: 'It is an offence to make a false or misleading statement in ' +
-          'respect of a material fact in a record submitted to the Corporate Registry for filing. ' +
-          'See Section 51 of the Business Corporations Act.',
       confirmationType: 'CONFIRM'
     },
     {
       feeCode: FilingCodes.DIRECTOR_CHANGE_BC,
       displayName: 'Change Of Directors',
-      certifyText: 'It is an offence to make a false or misleading statement in ' +
-          'respect of a material fact in a record submitted to the Corporate Registry for filing. ' +
-          'See Section 127 of the Business Corporations Act.',
       confirmationType: 'CONFIRM',
       warnings: {
         minDirectors: {
@@ -43,33 +37,21 @@ export const BusinessConfigBen = {
     {
       feeCode: FilingCodes.CONTINUATION_OUT,
       displayName: 'Continuation Out',
-      certifyText: 'It is an offence to make or assist in making a false or' +
-        ' misleading statement in a record filed under the Business Corporations Act.' +
-        ' A person who commits this offence is subject to a maximum fine of $5,000.',
       confirmationType: 'CONFIRM'
     },
     {
       feeCode: FilingCodes.AGM_EXTENSION,
       displayName: 'AGM Extension',
-      certifyText: 'It is an offence to make or assist in making a false or' +
-        ' misleading statement in a record filed under the Business Corporations Act.' +
-        ' A person who commits this offence is subject to a maximum fine of $5,000.',
       confirmationType: 'CONFIRM'
     },
     {
       feeCode: FilingCodes.AGM_LOCATION_CHANGE,
       displayName: 'AGM Location Change',
-      certifyText: 'It is an offence to make or assist in making a false or' +
-        ' misleading statement in a record filed under the Business Corporations Act.' +
-        ' A person who commits this offence is subject to a maximum fine of $5,000.',
       confirmationType: 'CONFIRM'
     },
     {
       feeCode: FilingCodes.NOTICE_OF_WITHDRAWAL,
       displayName: 'Notice of Withdrawal',
-      certifyText: 'It is an offence to make a false or misleading statement in ' +
-          'respect of a material fact in a record submitted to the Corporate Registry for filing. ' +
-          'See section 427 of the Business Corporations Act.',
       confirmationType: 'CONFIRM'
     }
   ],
