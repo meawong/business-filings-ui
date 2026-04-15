@@ -158,7 +158,17 @@
             <section>
               <header>
                 <h2>Certify</h2>
-                <p class="grey-text">
+                <p
+                  v-if="isBaseCompany"
+                  class="grey-text"
+                >
+                  Confirm your authorization to complete and submit this application. The name of the person submitting
+                  this filing will be displayed in the history of filings for this {{ entityDisplay }}.
+                </p>
+                <p
+                  v-else
+                  class="grey-text"
+                >
                   Enter the legal name of the person authorized to complete and submit this filing.
                 </p>
               </header>
@@ -173,6 +183,8 @@
                   :class="{ 'invalid-component': !certifyFormValid && showErrors }"
                   :entityDisplay="displayName()"
                   :message="certifyText(FilingCodes.CONTINUATION_OUT)"
+                  :showLegalName="!isBaseCompany"
+                  :confirmationType="confirmationType(FilingCodes.CONTINUATION_OUT)"
                   @valid="certifyFormValid=$event"
                 />
               </div>
@@ -726,9 +738,10 @@ export default class ContinuationOut extends Mixins(CommonMixin, DateMixin, Fili
     const header: any = {
       header: {
         name: FilingTypes.CONTINUATION_OUT,
-        certifiedBy: this.certifiedBy || '',
+        certifiedBy: this.isBaseCompany ? undefined : (this.certifiedBy || undefined),
         email: this.getBusinessEmail || undefined,
-        date: this.getCurrentDate // NB: API will reassign this date according to its clock
+        date: this.getCurrentDate, // NB: API will reassign this date according to its clock
+        ...(this.isBaseCompany ? { authorizationReceived: true } : {})
       }
     }
 

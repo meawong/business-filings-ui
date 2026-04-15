@@ -157,7 +157,17 @@
             <section>
               <header>
                 <h2>Certify</h2>
-                <p class="grey-text">
+                <p
+                  v-if="isBaseCompany"
+                  class="grey-text"
+                >
+                  Confirm your authorization to complete and submit this application. The name of the person submitting
+                  this filing will be displayed in the history of filings for this {{ entityDisplay }}.
+                </p>
+                <p
+                  v-else
+                  class="grey-text"
+                >
                   Enter the legal name of the person authorized to complete and submit this filing.
                 </p>
               </header>
@@ -173,6 +183,8 @@
                   :disableEdit="!IsAuthorized(AuthorizedActions.EDITABLE_CERTIFY_NAME)"
                   :entityDisplay="displayName()"
                   :message="certifyText(FilingCodes.ANNUAL_REPORT_OT)"
+                  :showLegalName="!isBaseCompany"
+                  :confirmationType="confirmationType(FilingCodes.ANNUAL_REPORT_OT)"
                   @valid="certifyFormValid=$event"
                 />
               </div>
@@ -768,11 +780,12 @@ export default class ConsentContinuationOut extends Mixins(CommonMixin, DateMixi
     const header: any = {
       header: {
         name: FilingTypes.CONSENT_CONTINUATION_OUT,
-        certifiedBy: this.certifiedBy || '',
+        certifiedBy: this.isBaseCompany ? undefined : (this.certifiedBy || undefined),
         email: this.getBusinessEmail || undefined,
         date: this.getCurrentDate, // NB: API will reassign this date according to its clock
         folioNumber: this.getTransactionalFolioNumber || this.getFolioNumber || undefined,
-        isTransactionalFolioNumber: !!this.getTransactionalFolioNumber
+        isTransactionalFolioNumber: !!this.getTransactionalFolioNumber,
+        ...(this.isBaseCompany ? { authorizationReceived: true } : {})
       }
     }
 

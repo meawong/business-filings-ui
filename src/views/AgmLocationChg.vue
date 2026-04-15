@@ -199,7 +199,14 @@
 
             <!-- Certify -->
             <section>
-              <header>
+              <header v-if="isBaseCompany">
+                <h2>Authorization</h2>
+                <p class="grey-text">
+                  Confirm your authorization to complete and submit this application. The name of the person submitting
+                  this filing will be displayed in the history of filings for this {{ entityDisplay }}.
+                </p>
+              </header>
+              <header v-else>
                 <h2>Certify</h2>
                 <p class="grey-text">
                   Enter the legal name of the person authorized to complete and submit this filing.
@@ -217,6 +224,8 @@
                   :disableEdit="!IsAuthorized(AuthorizedActions.EDITABLE_CERTIFY_NAME)"
                   :entityDisplay="displayName()"
                   :message="certifyText(FilingCodes.AGM_LOCATION_CHANGE)"
+                  :showLegalName="!isBaseCompany"
+                  :confirmationType="confirmationType(FilingCodes.AGM_LOCATION_CHANGE)"
                   @valid="certifyFormValid=$event"
                 />
               </div>
@@ -575,10 +584,11 @@ export default class AgmLocationChg extends Mixins(CommonMixin, DateMixin, Filin
     const header: any = {
       header: {
         name: FilingTypes.AGM_LOCATION_CHANGE,
-        certifiedBy: this.certifiedBy || '',
+        certifiedBy: this.isBaseCompany ? undefined : (this.certifiedBy || undefined),
         date: this.getCurrentDate, // NB: API will reassign this date according to its clock
         folioNumber: this.getTransactionalFolioNumber || this.getFolioNumber || undefined,
-        isTransactionalFolioNumber: !!this.getTransactionalFolioNumber
+        isTransactionalFolioNumber: !!this.getTransactionalFolioNumber,
+        ...(this.isBaseCompany ? { authorizationReceived: true } : {})
       }
     }
 

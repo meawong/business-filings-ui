@@ -8,13 +8,25 @@
         cols="12"
         sm="3"
       >
-        <label class="title-label">Legal Name</label>
+        <label
+          v-if="showLegalName"
+          class="title-label"
+        >Legal Name</label>
+        <label
+          v-else-if="confirmationType === 'CONFIRM'"
+          class="title-label"
+        >Authorization Confirm</label>
+        <label
+          v-else
+          class="title-label"
+        >Certify</label>
       </v-col>
       <v-col
         cols="12"
         sm="9"
       >
         <v-text-field
+          v-if="showLegalName"
           id="certified-by-textfield"
           ref="certifyTextfieldRef"
           filled
@@ -31,19 +43,36 @@
           @change="emitIsCertified($event)"
         >
           <template #label>
+            <!-- Legal Name Variant (Firms/Coops) -->
             <div
-              v-if="IsAuthorized(AuthorizedActions.THIRD_PARTY_CERTIFY_STMT)"
+              v-if="showLegalName && IsAuthorized(AuthorizedActions.THIRD_PARTY_CERTIFY_STMT)"
               class="certify-stmt"
             >
               <strong>{{ trimmedCertifiedBy || "[Legal Name]" }}</strong> certifies that they have relevant
               knowledge of the {{ entityDisplay || "business" }} and are authorized to make this filing.
             </div>
             <div
-              v-else
+              v-else-if="showLegalName"
               class="certify-stmt"
             >
               I, <strong>{{ trimmedCertifiedBy || "[Legal Name]" }}</strong>, certify that I have relevant
               knowledge of the {{ entityDisplay || "business" }} and I am authorized to make this filing.
+            </div>
+            <!-- Corporation Variant with Confirm -->
+            <div
+              v-else-if="confirmationType === 'CONFIRM'"
+              class="certify-stmt"
+            >
+              I confirm that the information provided is correct and that I am authorized to submit this filing
+              on behalf of the {{ entityDisplay || "business" }}.
+            </div>
+            <!-- Corporation Variant with Certify -->
+            <div
+              v-else
+              class="certify-stmt"
+            >
+              I certify that the information provided is correct and that I am authorized to submit this filing
+              on behalf of the {{ entityDisplay || "business" }}.
             </div>
           </template>
         </v-checkbox>
@@ -97,6 +126,12 @@ export default class Certify extends Vue {
   /** Whether to disable the Certified By input field. */
   @Prop({ default: false }) readonly disableEdit!: boolean
 
+  @Prop({ default: false }) readonly showLegalName!: boolean
+
+  /** Confirmation type for corporation filings. When showLegalName is false, determines whether to show
+   * "confirm" or "certify" in the checkbox statement. */
+  @Prop({ default: 'CERTIFY' }) readonly confirmationType!: 'CONFIRM' | 'CERTIFY'
+
   // local properties
   certifyName = ''
   checkboxState = false
@@ -104,7 +139,9 @@ export default class Certify extends Vue {
   /** Called when component is created. */
   created (): void {
     // inform parent of initial validity
-    this.emitValid(!!this.trimmedCertifiedBy && this.isCertified)
+    // When showLegalName is true, require both certified name and checkbox
+    // When showLegalName is false, require checkbox only
+    this.emitValid(this.showLegalName ? (!!this.trimmedCertifiedBy && this.isCertified) : this.isCertified)
   }
 
   get formattedCurrentDate (): string {
@@ -121,7 +158,7 @@ export default class Certify extends Vue {
   /** Validate business name field */
   @Watch('validateForm')
   validateBusinessName (): void {
-    if (this.validateForm && !this.certifyName) {
+    if (this.showLegalName && this.validateForm && !this.certifyName) {
       this.$refs.certifyTextfieldRef.validate()
       this.$refs.certifyTextfieldRef.error = true
     }
@@ -137,14 +174,24 @@ export default class Certify extends Vue {
   emitCertifiedBy (certifiedBy: string): string {
     // remove repeated inline whitespace, and leading/trailing whitespace
     certifiedBy = certifiedBy && certifiedBy.replace(/\s+/g, ' ').trim()
-    this.emitValid(!!certifiedBy && this.isCertified)
+    // When showLegalName is true, require both certified name and checkbox
+    // When showLegalName is false, require checkbox only
+    const isValid = this.showLegalName
+      ? (!!certifiedBy && this.isCertified)
+      : this.isCertified
+    this.emitValid(isValid)
     return certifiedBy
   }
 
   /** Emits an event to update the Is Certified prop. */
   @Emit('update:isCertified')
   emitIsCertified (isCertified: boolean): boolean {
-    this.emitValid(!!this.trimmedCertifiedBy && isCertified)
+    // When showLegalName is true, require both certified name and checkbox
+    // When showLegalName is false, require checkbox only
+    const isValid = this.showLegalName
+      ? (!!this.trimmedCertifiedBy && isCertified)
+      : isCertified
+    this.emitValid(isValid)
     this.checkboxState = isCertified
     return isCertified
   }
