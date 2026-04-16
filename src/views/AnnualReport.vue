@@ -282,7 +282,7 @@
                 </h2>
                 <p>
                   Confirm your authorization to complete and submit this Annual Report. The name of the person
-                  submitting this filing will be displayed in the history of filings for this {{ entityDisplay }}.
+                  submitting this filing will be displayed in the history of filings for this {{ displayName() }}.
                 </p>
               </header>
               <header v-else>

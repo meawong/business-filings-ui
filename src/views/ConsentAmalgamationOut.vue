@@ -162,7 +162,7 @@
                   class="grey-text"
                 >
                   Certify your authorization to complete and submit this application. The name of the person submitting
-                  this filing will be displayed in the history of filings for this {{ entityDisplay }}.
+                  this filing will be displayed in the history of filings for this {{ displayName() }}.
                 </p>
                 <p
                   v-else
