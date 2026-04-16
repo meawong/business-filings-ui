@@ -275,13 +275,11 @@
             <!-- Certify -->
             <section v-show="isBaseCompany || agmDateValid">
               <header v-if="isBaseCompany">
-                <h2
-                  id="certify-header"
-                >
+                <h2 id="certify-header">
                   Authorization
                 </h2>
                 <p>
-                  Confirm your authorization to complete and submit this Annual Report. The name of the person
+                  Confirm your authorization to complete and submit this application. The name of the person
                   submitting this filing will be displayed in the history of filings for this {{ displayName() }}.
                 </p>
               </header>
