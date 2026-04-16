@@ -107,10 +107,10 @@ describe('AGM Extension view', () => {
     expect(sections.at(1).find('header > p').text())
       .toContain('This is meant for your own tracking purposes and will appear on your receipt.')
 
-    // Certify section
-    expect(sections.at(2).find('header > h2').text()).toBe('Certify')
+    // Authorization section
+    expect(sections.at(2).find('header > h2').text()).toBe('Authorization')
     expect(sections.at(2).find('header > p').text())
-      .toContain('Enter the legal name of the person authorized to complete and submit this filing.')
+      .toContain('Confirm your authorization to complete and submit this application.')
   })
 
   it('displays expandable help properly', async () => {
@@ -179,7 +179,7 @@ describe('AGM Extension view', () => {
     })
 
     // simulate valid certify data and component
-    wrapper.setData({ certifiedBy: 'Full Name', isCertified: true, certifyFormValid: true })
+    wrapper.setData({ isCertified: true, certifyFormValid: true })
     await flushPromises()
     // click the file-pay button
     await wrapper.find('#file-pay-btn').trigger('click')
@@ -226,7 +226,7 @@ describe('AGM Extension view', () => {
     })
 
     // simulate valid certify data and component
-    wrapper.setData({ certifiedBy: 'Full Name', isCertified: true, certifyFormValid: true })
+    wrapper.setData({ isCertified: true, certifyFormValid: true })
 
     // mock the navigate function
     const mockNavigate = vi.spyOn(utils, 'Navigate').mockImplementation(() => {
@@ -270,7 +270,7 @@ describe('AGM Extension view', () => {
         legalType: 'BEN'
       },
       header: {
-        certifiedBy: 'Full Name',
+        authorizationReceived: true,
         date: '2023-11-06',
         name: 'agmExtension',
         folioNumber: undefined,
@@ -310,7 +310,7 @@ describe('AGM Extension view', () => {
     })
 
     // simulate valid certify data and component
-    wrapper.setData({ certifiedBy: 'Full Name', isCertified: true, certifyFormValid: true })
+    wrapper.setData({ isCertified: true, certifyFormValid: true })
 
     // mock the navigate function
     const mockNavigate = vi.spyOn(utils, 'Navigate').mockImplementation(() => {

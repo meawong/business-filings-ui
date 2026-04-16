@@ -649,7 +649,8 @@ export default class ContinuationOut extends Mixins(CommonMixin, DateMixin, Fili
     if (!this.isPageValid) {
       this.showErrors = true
 
-      if (!this.certifyFormValid) {
+      if (!this.certifyFormValid && !this.isBaseCompany) {
+        // Show error message of legal name text field if invalid (not applicable for corporations)
         this.$refs.certifyRef.$refs.certifyTextfieldRef.error = true
       }
 

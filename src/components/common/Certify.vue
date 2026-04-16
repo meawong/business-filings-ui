@@ -126,7 +126,7 @@ export default class Certify extends Vue {
   /** Whether to disable the Certified By input field. */
   @Prop({ default: false }) readonly disableEdit!: boolean
 
-  @Prop({ default: false }) readonly showLegalName!: boolean
+  @Prop({ default: true }) readonly showLegalName!: boolean
 
   /** Confirmation type for corporation filings. When showLegalName is false, determines whether to show
    * "confirm" or "certify" in the checkbox statement. */

@@ -723,7 +723,8 @@ export default class AmalgamationOut extends Mixins(CommonMixin, DateMixin, Fili
       if (!this.detailCommentValid) {
         this.$refs.detailCommentRef.$refs.textarea.error = true
       }
-      if (!this.certifyFormValid) {
+      if (!this.certifyFormValid && !this.isBaseCompany) {
+        // Show error message of legal name text field if invalid (not applicable for corporations)
         this.$refs.certifyRef.$refs.certifyTextfieldRef.error = true
       }
 

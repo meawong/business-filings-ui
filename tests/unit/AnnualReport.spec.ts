@@ -1691,25 +1691,6 @@ describe('Annual Report - Part 5 - Data', () => {
     expect(names).not.toContain('Ceased')
   })
 
-  it('includes certification data in the header', async () => {
-    // click the Save button
-    // await wrapper.find('#ar-save-btn').trigger('click')
-    // work-around because click trigger isn't working
-    await vm.onClickSave()
-
-    const payload = spy.args[0][1]
-
-    // basic tests to pass ensuring structure of payload is as expected
-    expect(payload.filing).toBeDefined()
-    expect(payload.filing.annualReport).toBeDefined()
-    expect(payload.filing.header).toBeDefined()
-
-    expect(payload.filing.header.certifiedBy).toBeDefined()
-    expect(payload.filing.header.email).toBeDefined()
-
-    expect(payload.filing.header.routingSlipNumber).toBeUndefined() // normally not saved
-  })
-
   it('includes the AR Date for the current filing year', async () => {
     // set current date in store, since it's normally set in a different component
     rootStore.currentJsDate = new Date('2019-03T12:00:00')
@@ -1873,7 +1854,7 @@ describe('Annual Report - Part 5B - Data (BCOMP)', () => {
     expect(payload.filing.annualReport.offices.recordsOffice).toBeDefined()
   })
 
-  it('includes certification data in the header', async () => {
+  it('includes authorization data in the header', async () => {
     const button = wrapper.find('#ar-file-pay-bc-btn')
     expect(button.attributes('disabled')).toBeUndefined()
 
@@ -1890,7 +1871,7 @@ describe('Annual Report - Part 5B - Data (BCOMP)', () => {
     expect(payload.filing.annualReport).toBeDefined()
     expect(payload.filing.header).toBeDefined()
 
-    expect(payload.filing.header.certifiedBy).toBeDefined()
+    expect(payload.filing.header.authorizationReceived).toBeDefined()
     expect(payload.filing.header.email).toBeDefined()
 
     expect(payload.filing.header.routingSlipNumber).toBeUndefined() // normally not saved

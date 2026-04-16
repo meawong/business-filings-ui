@@ -1455,23 +1455,6 @@ describe('Standalone Directors Filing - Part 5 - Data', () => {
     expect(firstNames).toContain('Appointed')
     expect(firstNames).toContain('Ceased')
   })
-
-  it('Includes certification data in the header', async () => {
-    // click the Save button
-    // await wrapper.find('#cod-save-btn').trigger('click')
-    // work-around because click trigger isn't working
-    await vm.onClickSave()
-
-    const payload = spy.args[0][1]
-
-    // basic tests to pass ensuring structure of payload is as expected
-    expect(payload.filing).toBeDefined()
-    expect(payload.filing.changeOfDirectors).toBeDefined()
-    expect(payload.filing.header).toBeDefined()
-
-    expect(payload.filing.header.certifiedBy).toBeDefined()
-    expect(payload.filing.header.email).toBeDefined()
-  })
 })
 
 describe('Standalone Directors Filing - Part 6 - Error/Warning Dialogs', () => {

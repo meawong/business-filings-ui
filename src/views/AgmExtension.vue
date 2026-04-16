@@ -343,7 +343,8 @@ export default class AgmExtension extends Mixins(CommonMixin, DateMixin, FilingM
     this.data.incorporationDate = this.getFoundingDate
 
     // Pre-populate the certified block with the logged in user's name (if no permission for blank certificate)
-    if (!IsAuthorized(AuthorizedActions.BLANK_CERTIFY_STATE) && this.getUserInfo) {
+    // Corporations do no thave a certifiedBy field
+    if (!this.isBaseCompany && !IsAuthorized(AuthorizedActions.BLANK_CERTIFY_STATE) && this.getUserInfo) {
       this.certifiedBy = this.getUserInfo.firstname + ' ' + this.getUserInfo.lastname
     }
 
@@ -376,8 +377,8 @@ export default class AgmExtension extends Mixins(CommonMixin, DateMixin, FilingM
       if (!this.extensionRequestValid) {
         // nothing to do here -- "showErrors" will do it all
       }
-      if (!this.certifyFormValid) {
-        // Show error message of legal name text field if invalid
+      if (!this.certifyFormValid && !this.isBaseCompany) {
+        // Show error message of legal name text field if invalid (not applicable for corporations)
         this.$refs.certifyRef.$refs.certifyTextfieldRef.error = true
       }
       await this.validateAndScroll(this.validFlags, this.validComponents)
