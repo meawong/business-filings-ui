@@ -275,7 +275,7 @@
             <!-- Certify -->
             <section v-show="isBaseCompany || agmDateValid">
               <header v-if="isBaseCompany">
-                <h2 id="certify-header">
+                <h2>
                   Authorization
                 </h2>
                 <p>
