@@ -288,7 +288,10 @@
                     <h2 id="certify-header">
                       Certify
                     </h2>
-                    <p>Enter the legal name of the person authorized to complete and submit this Annual Report</p>
+                    <p>
+                      Enter the legal name of the person authorized to complete and submit this
+                      Director Change.
+                    </p>
                   </header>
                   <Certify
                     :isCertified.sync="isCertified"

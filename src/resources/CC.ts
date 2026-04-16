@@ -35,9 +35,21 @@ export const BusinessConfigCc = {
       }
     },
     {
+      feeCode: FilingCodes.AMALGAMATION_OUT,
+      confirmationType: 'CERTIFY'
+    },
+    {
+      feeCode: FilingCodes.CONSENT_AMALGAMATION_OUT,
+      confirmationType: 'CERTIFY'
+    },
+    {
+      feeCode: FilingCodes.CONSENT_CONTINUATION_OUT,
+      confirmationType: 'CERTIFY'
+    },
+    {
       feeCode: FilingCodes.CONTINUATION_OUT,
       displayName: 'Continuation Out',
-      confirmationType: 'CONFIRM'
+      confirmationType: 'CERTIFY'
     },
     {
       feeCode: FilingCodes.AGM_EXTENSION,

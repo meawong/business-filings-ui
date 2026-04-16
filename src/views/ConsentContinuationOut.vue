@@ -184,7 +184,7 @@
                   :entityDisplay="displayName()"
                   :message="certifyText(FilingCodes.ANNUAL_REPORT_OT)"
                   :showLegalName="!isBaseCompany"
-                  :confirmationType="confirmationType(FilingCodes.ANNUAL_REPORT_OT)"
+                  :confirmationType="confirmationType(FilingCodes.CONSENT_CONTINUATION_OUT)"
                   @valid="certifyFormValid=$event"
                 />
               </div>

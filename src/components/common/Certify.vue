@@ -79,8 +79,12 @@
         <p class="certify-clause signature-date">
           <strong>Date:</strong> {{ formattedCurrentDate || '[unknown]' }}
         </p>
-        <p class="certify-clause">
-          <strong v-if="message">Note:</strong> {{ message }}
+        <p
+          v-if="message"
+          class="certify-clause"
+        >
+          <strong>Note: </strong>
+          <span v-html="message" />
         </p>
       </v-col>
     </v-row>
