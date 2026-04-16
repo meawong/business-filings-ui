@@ -161,7 +161,7 @@
                   v-if="isBaseCompany"
                   class="grey-text"
                 >
-                  Confirm your authorization to complete and submit this application. The name of the person submitting
+                  Certify your authorization to complete and submit this application. The name of the person submitting
                   this filing will be displayed in the history of filings for this {{ entityDisplay }}.
                 </p>
                 <p
