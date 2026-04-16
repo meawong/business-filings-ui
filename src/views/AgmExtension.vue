@@ -343,7 +343,7 @@ export default class AgmExtension extends Mixins(CommonMixin, DateMixin, FilingM
     this.data.incorporationDate = this.getFoundingDate
 
     // Pre-populate the certified block with the logged in user's name (if no permission for blank certificate)
-    // Corporations do no thave a certifiedBy field
+    // Corporations do not have a certifiedBy field
     if (!this.isBaseCompany && !IsAuthorized(AuthorizedActions.BLANK_CERTIFY_STATE) && this.getUserInfo) {
       this.certifiedBy = this.getUserInfo.firstname + ' ' + this.getUserInfo.lastname
     }
@@ -479,7 +479,7 @@ export default class AgmExtension extends Mixins(CommonMixin, DateMixin, FilingM
         date: this.getCurrentDate, // NB: API will reassign this date according to its clock
         folioNumber: this.getTransactionalFolioNumber || this.getFolioNumber || undefined,
         isTransactionalFolioNumber: !!this.getTransactionalFolioNumber,
-        ...(this.isBaseCompany ? { authorizationReceived: true } : {})
+        ...(this.isBaseCompany ? { authorizationReceived: this.isCertified } : {})
       }
     }
 

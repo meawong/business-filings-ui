@@ -434,7 +434,7 @@ export default class NoticeOfWithdrawal extends Mixins(CommonMixin, DateMixin, F
       this.dataLoaded = true
 
       // Pre-populate the certified block with the logged in user's name unless they have proper permissions.
-      // Corporations do no thave a certifiedBy field
+      // Corporations do not have a certifiedBy field
       if (!this.isBaseCompany && !IsAuthorized(AuthorizedActions.BLANK_CERTIFY_STATE) && this.getUserInfo) {
         this.certifiedBy = this.getUserInfo.firstname + ' ' + this.getUserInfo.lastname
       }
@@ -556,7 +556,7 @@ export default class NoticeOfWithdrawal extends Mixins(CommonMixin, DateMixin, F
           certifiedBy: this.isBaseCompany ? undefined : (this.certifiedBy || undefined),
           email: this.getBusinessEmail || undefined,
           date: this.getCurrentDate, // NB: API will reassign this date according to its clock
-          ...(this.isBaseCompany ? { authorizationReceived: true } : {})
+          ...(this.isBaseCompany ? { authorizationReceived: this.isCertified } : {})
         }
       }
 

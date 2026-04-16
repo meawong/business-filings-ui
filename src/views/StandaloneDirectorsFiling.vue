@@ -929,7 +929,7 @@ export default class StandaloneDirectorsFiling extends Mixins(CommonMixin, DateM
         effectiveDate: this.yyyyMmDdToApi(this.codDate),
         folioNumber: this.getTransactionalFolioNumber || this.getFolioNumber || undefined,
         isTransactionalFolioNumber: !!this.getTransactionalFolioNumber,
-        ...(this.isBaseCompany ? { authorizationReceived: true } : {})
+        ...(this.isBaseCompany ? { authorizationReceived: this.isCertified } : {})
       }
     }
 

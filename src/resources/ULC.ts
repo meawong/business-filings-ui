@@ -1,6 +1,6 @@
 import { CorpTypeCd } from '@/enums'
 import { FilingCodes } from '@bcrs-shared-components/enums'
-import { GetCorpFullDescription } from '@bcrs-shared-components/corp-type-module/corp-type-module'
+import { GetCorpFullDescription } from '@bcrs-shared-components/corp-type-module'
 
 // FUTURE: this object needs an interface or type
 export const BusinessConfigUlc = {

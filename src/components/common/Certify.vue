@@ -15,7 +15,7 @@
         <label
           v-else-if="confirmationType === 'CONFIRM'"
           class="title-label"
-        >Authorization Confirm</label>
+        >Confirm Authorization</label>
         <label
           v-else
           class="title-label"

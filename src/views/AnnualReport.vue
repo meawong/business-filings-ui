@@ -1099,7 +1099,7 @@ export default class AnnualReport extends Mixins(CommonMixin, DateMixin, FilingM
         effectiveDate: this.yyyyMmDdToApi(this.asOfDate),
         folioNumber: this.getTransactionalFolioNumber || this.getFolioNumber || undefined,
         isTransactionalFolioNumber: !!this.getTransactionalFolioNumber,
-        ...(this.isBaseCompany ? { authorizationReceived: true } : {})
+        ...(this.isBaseCompany ? { authorizationReceived: this.isCertified } : {})
       }
     }
 

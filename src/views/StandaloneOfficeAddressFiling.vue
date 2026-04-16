@@ -754,7 +754,7 @@ export default class StandaloneOfficeAddressFiling extends Mixins(CommonMixin, D
         effectiveDate: this.yyyyMmDdToApi(this.coaDate),
         folioNumber: this.getTransactionalFolioNumber || this.getFolioNumber || undefined,
         isTransactionalFolioNumber: !!this.getTransactionalFolioNumber,
-        ...(this.isBaseCompany ? { authorizationReceived: true } : {})
+        ...(this.isBaseCompany ? { authorizationReceived: this.isCertified } : {})
       }
     }
 
